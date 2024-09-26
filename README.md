@@ -1,12 +1,4 @@
 
-◦ entre 200 y 1000 palabras: propuesta de proyecto, con título, resumen, hipótesis de trabajo, objetivos preliminares, técnicas relevantes para aplicar y justificación, 
-referencias (bibliográficas y de código), planificación
-
-https://sites.google.com/unc.edu.ar/textmining2021/proyectos?authuser=0
-proyectos para insipirarse
-
-DE ACA PARA ARRIBA BORRAR AAAAAAAAAAAAAAA
-
 # Resumenes de chats grupales
 
 ## Resumen
@@ -14,12 +6,12 @@ DE ACA PARA ARRIBA BORRAR AAAAAAAAAAAAAAA
 El proyecto tiene como objetivo realizar un resumen de los temas más significativos en un chat grupal propio, utilizando datos reales de conversaciones obtenidas de nuestras propias interacciones, en lugar de datasets externos. Para ello, se tendrán en cuenta la relevancia de los mensajes, los temas tratados, y la participación de los usuarios más activos en cada tema. El resumen se generará utilizando técnicas avanzadas de fine-tuning aplicadas a modelos de lenguaje de gran tamaño (LLMs).
 
 ## Hipótesis
-<!-- no se lo saqué de chatgpt jaja, esto se ve si ven el raw saludo-->
+
 El uso de modelos de LLM combinados con técnicas de detección de temas permite generar resúmenes comprensibles de chats grupales, capturando los temas principales, preservando las aportaciones más relevantes de la conversación
 
 
 ## Objetivos preliminares
-<!-- pseudo chatgpt -->
+
 - **Análisis de contenido**: Identificar los temas principales discutidos en el chat grupal mediante técnicas de agrupamiento temático.
 - **Compresión de la información**: Generar un resumen corto que conserve la esencia de las discusiones principales sin perder detalles críticos.
 - **Evaluación de la calidad del resumen**: Implementar tests automáticos para evaluar la precisión y cobertura de los resúmenes generados.
