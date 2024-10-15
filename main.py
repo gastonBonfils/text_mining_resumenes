@@ -1,5 +1,6 @@
 import argparse
 from fine_tuned import summarize_chat
+import sys
 
 
 def process_file(file_path):
@@ -20,7 +21,12 @@ def process_input():
     """
     caso que se pasa sin archivo
     """
-    chat = input("Pega tu chat: ")
+    # chat = input("Pega tu chat: ")
+    print("Copia el chat y luego toca Ctrl + D")
+    msg = sys.stdin.readlines()
+    chat = "".join(msg)
+    # print()
+    # exit()
     return chat
 
 

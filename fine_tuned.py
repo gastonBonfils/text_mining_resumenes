@@ -13,6 +13,7 @@ from transformers import pipeline
 
 
 def summarize_chat(chat):
+    # print("El input fue: ", chat)
     summarizer = pipeline(
         "summarization",
         model="kabita-choudhary/finetuned-bart-for-conversation-summary",
