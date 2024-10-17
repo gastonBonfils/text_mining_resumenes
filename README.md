@@ -1,11 +1,9 @@
+# Instalación
 
-◦ entre 200 y 1000 palabras: propuesta de proyecto, con título, resumen, hipótesis de trabajo, objetivos preliminares, técnicas relevantes para aplicar y justificación, 
-referencias (bibliográficas y de código), planificación
+`python3 -m venv .venv`  
+`source .venv/bin/activate`  
+`pip install -q -r requirements.txt`  
 
-https://sites.google.com/unc.edu.ar/textmining2021/proyectos?authuser=0
-proyectos para insipirarse
-
-DE ACA PARA ARRIBA BORRAR AAAAAAAAAAAAAAA
 
 # Resumenes de chats grupales
 
