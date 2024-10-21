@@ -1,3 +1,9 @@
+# Instalación
+
+`python3 -m venv .venv`  
+`source .venv/bin/activate`  
+`pip install -q -r requirements.txt`  
+
 
 # Resumenes de chats grupales
 
