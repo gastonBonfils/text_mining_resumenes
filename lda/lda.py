@@ -9,6 +9,21 @@ nltk.download("stopwords")
 nltk.download("wordnet")
 
 from chat_parser import fragmentar_chat_telegram
+import unicodedata
+
+
+def quitar_tildes(texto):
+    # Normalizamos el texto para separar las letras acentuadas
+    texto_normalizado = unicodedata.normalize("NFD", texto)
+
+    # Filtramos las letras acentuadas (que tienen una "combinación" de caracteres como la tilde)
+    # y las transformamos a su versión sin tilde.
+    texto_sin_tildes = "".join(
+        [c for c in texto_normalizado if unicodedata.category(c) != "Mn"]
+    )
+
+    # Devolvemos el texto sin tildes
+    return texto_sin_tildes
 
 
 def model_lda(lista_mensajes, num_topics=6):
@@ -37,7 +52,8 @@ def model_lda(lista_mensajes, num_topics=6):
             contenido = ""
 
         # filtro la puntuación y los paso a minuscula
-        contenido_sin_puntuacion = re.sub(r"[,\.!?]", "", contenido.lower())
+        contenido_sin_tilde = quitar_tildes(contenido)
+        contenido_sin_puntuacion = re.sub(r"[,\.!?]", "", contenido_sin_tilde.lower())
         texts.append(
             [
                 lemmatizer.lemmatize(palabra)
@@ -65,9 +81,39 @@ def model_lda(lista_mensajes, num_topics=6):
     return rta_lda
 
 
-def message_list_per_topic(rta_lda, message_list):
-    ...
-    # return list_per_topic
+def message_list_per_topic(topics_list, message_list):
+    """
+    dado la lista de temas (topics_list) de la forma
+    [(n_tema [('tema', porcentaje)]), ... ]
+    y la lista de mensajes
+    devuele una lista de la forma
+    [(n_tema, [lista de mensajes relevantes al tema]), ....]
+    """
+    final_list = []
+    for n_tema, lista_temas in topics_list:
+        # ordenamos por relevancia la lista de temas para quedarnos con
+        # el 70%? mas relevante
+        lista_temas.sort(key=lambda x: x[1], reverse=True)
+        suma_porcentaje = 0.0
+        temas_relevantes = []
+
+        for tema, porcentaje in lista_temas:
+            # si agarré el top x%  ya la corto
+            if suma_porcentaje >= 0.5:
+                break
+            suma_porcentaje += porcentaje
+
+            # me voy quedando con los temas mas relevantes
+            temas_relevantes.append(tema)
+
+        # una vez que salí del bucle (i.e. tengo los temas relevantes)
+        # hago una lista de mensajes filtrada
+        mensajes_relevantes = [
+            msj for msj in message_list if any(tema in msj for tema in temas_relevantes)
+        ]
+        final_list.append((n_tema, mensajes_relevantes))
+
+    return final_list
 
 
 if __name__ == "__main__":
@@ -80,3 +126,8 @@ if __name__ == "__main__":
 
         topicos = lda_model.show_topics(formatted=False)
         print(topicos)
+
+        lista_filtrada = message_list_per_topic(topicos, lista_mensajes)
+
+        print("=====")
+        print(lista_filtrada)
