@@ -6,7 +6,9 @@ WHATSAPP = 1
 
 
 def summarize_chat(chat):
-    # print("El input fue: ", chat)
+    """
+    resume un chat nomas
+    """
     summarizer = pipeline(
         "summarization",
         model="kabita-choudhary/finetuned-bart-for-conversation-summary",
@@ -44,6 +46,6 @@ Tema #{n_tema}
 Temas relevantes = {temas}
 Resumen:
 {resumen}
-============
+=============
 """
         )
