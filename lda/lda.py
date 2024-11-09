@@ -8,7 +8,7 @@ import re
 nltk.download("stopwords")
 nltk.download("wordnet")
 
-from chat_parser import fragmentar_chat_telegram
+from lda.chat_parser import fragmentar_chat_telegram
 import unicodedata
 
 
@@ -87,7 +87,7 @@ def message_list_per_topic(topics_list, message_list):
     [(n_tema [('tema', porcentaje)]), ... ]
     y la lista de mensajes
     devuele una lista de la forma
-    [(n_tema, [lista de mensajes relevantes al tema]), ....]
+    [(n_tema, [lista de temas relevantes (para testign)] , [lista de mensajes relevantes al tema]), ....]
     """
     final_list = []
     for n_tema, lista_temas in topics_list:
@@ -111,12 +111,37 @@ def message_list_per_topic(topics_list, message_list):
         mensajes_relevantes = [
             msj for msj in message_list if any(tema in msj for tema in temas_relevantes)
         ]
-        final_list.append((n_tema, mensajes_relevantes))
+        final_list.append((n_tema, temas_relevantes, mensajes_relevantes))
 
     return final_list
 
 
+def chat_to_filtered_per_topic(chat, type=0):
+    """
+    esta funcion se encarga de ir llamando todo proceduralmente
+    deberia ser la unica llamada desde afuera
+
+    chat: string del chat
+        ya se asume que se parseo el path o el copia_pega
+
+    type: que tipo de chat es
+        telegram, whatasapp o no e cual otoro
+    """
+    lista_mensajes = []
+    if type == 0:
+        lista_mensajes = fragmentar_chat_telegram(chat)
+
+    # no se cuantos topics deberia ser lo ideal
+    lda_model = model_lda(lista_mensajes, 6)
+    topics = lda_model.show_topics(formatted=False)
+    lista_filtrada = message_list_per_topic(topics, lista_mensajes)
+    return lista_filtrada
+
+
 if __name__ == "__main__":
+    """
+    el main funciona como para debuggear
+    """
     with open("ejemplo.txt", "r") as file:
         chat_telegram = file.read()
 

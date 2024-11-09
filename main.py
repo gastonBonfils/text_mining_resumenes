@@ -1,5 +1,9 @@
 import argparse
-from llm.fine_tuned import summarize_chat
+from llm.fine_tuned import (
+    summarize_chat,
+    summarize_per_topic,
+    pretty_print_summary_list,
+)
 import sys
 
 
@@ -53,9 +57,12 @@ def main():
     else:
         chat = process_file(args.file)
 
-    summary = summarize_chat(chat)
+    # summaries = summarize_chat(chat)
 
-    print(summary)
+    # print(summary)
+    summaries = summarize_per_topic(chat)
+    # print(summaries)
+    pretty_print_summary_list(summaries)
 
 
 if __name__ == "__main__":
