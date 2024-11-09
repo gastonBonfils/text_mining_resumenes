@@ -8,7 +8,7 @@ import re
 nltk.download("stopwords")
 nltk.download("wordnet")
 
-from lda.chat_parser import fragmentar_chat_telegram
+from lda.chat_parser import fragmentar_chat_cualquiera
 import unicodedata
 
 
@@ -129,7 +129,7 @@ def chat_to_filtered_per_topic(chat, type=0):
     """
     lista_mensajes = []
     if type == 0:
-        lista_mensajes = fragmentar_chat_telegram(chat)
+        lista_mensajes = fragmentar_chat_cualquiera(chat)
 
     # no se cuantos topics deberia ser lo ideal
     lda_model = model_lda(lista_mensajes, 6)
@@ -146,7 +146,7 @@ if __name__ == "__main__":
         chat_telegram = file.read()
 
         # print(fragmentar_chat_telegram(chat_telegram))
-        lista_mensajes = fragmentar_chat_telegram(chat_telegram)
+        lista_mensajes = fragmentar_chat_cualquiera(chat_telegram)
         lda_model = model_lda(lista_mensajes, 3)
 
         topicos = lda_model.show_topics(formatted=False)
