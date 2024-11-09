@@ -8,54 +8,22 @@ import re
 nltk.download("stopwords")
 nltk.download("wordnet")
 
-
-def fragmentar_chat_telegram(chat):
-    """toma un pedazo de chat de telegram y
-    devuelve los mensajes en forma de lista
-
-    los chats de telegram son de la forma
-    NOMBRE APELLIDO, [MM/DD/AA H:MM AM]
-    CONTENIDO
-    <espacio vacio>
-    NOMBRE APELLIDO....
+from chat_parser import fragmentar_chat_telegram
 
 
-    Buscamos conservar contenido y nombre
+def model_lda(lista_mensajes, num_topics=6):
     """
-    # patron de mensajes en telegram, regex ♥
-    pattern = (
-        r"([A-Za-z\s]+), \[\d{1,2}/\d{1,2}/\d{2} \d{1,2}:\d{2}\s?[APM]{2}\]\n(.+?)\n"
-    )
-
-    # Encontrar todas las coincidencias
-    matches = re.findall(pattern, chat, re.DOTALL)
-
-    result = [f"{name.strip()}: {content.strip()}" for name, content in matches]
-
-    return result
-
-
-def lda(lista_mensajes, num_topics=6):
-    """
-    ORIGINAL
-    fragmentos de mensajes (i.e. documentos)
-    fragmentos es dictcionario de la forma
-    {mes/año : [lista mensajes]}
-    busco pasarlo a [lista mensjaes] nomas
-
-    y devuelve un dict de la forma
-    {mes/año : modelo_lda_correspodiente}
-
     CAMBIO
-    Paso una lista de mensajes
+    Paso una lista de mensajes de la forma [AUTOR: CONTENIDO]
     y devuelvo el modelito lda
+
+    la lda se va a quedar solo con el contenido, ignorando al atuor
+    se asume que no traen fecha
     """
     # limpiamos las stop swords
     stop_words = set(stopwords.words("spanish"))
     lemmatizer = WordNetLemmatizer()
 
-    # rta_lda = {}
-    # for m, msjs in fragmentos.items():
     # procesamiento
     texts = []
     for msj in lista_mensajes:
@@ -87,31 +55,28 @@ def lda(lista_mensajes, num_topics=6):
             corpus, num_topics=num_topics, id2word=dictionary, passes=15
         )
 
-        rta_lda = {
-            "lda_model": lda_model,
-            "corpus": corpus,
-            "dictionary": dictionary,
-            "topics": lda_model.print_topics(),
-        }
+        # rta_lda = {
+        #     "lda_model": lda_model,
+        #     "corpus": corpus,
+        #     "dictionary": dictionary,
+        #     "topics": lda_model.print_topics(),
+        # }
+        rta_lda = lda_model
     return rta_lda
 
 
-if __name__ == "__main__":
-    # fragmentos = [
-    #     "Gaston: hola tomi jugamos al futbol??",
-    #     "Tomi: hola, dale tengo muchas ganas de jugar",
-    #     "Gaston: unas ganas de hacer girar la redonda",
-    # ]
+def message_list_per_topic(rta_lda, message_list):
+    ...
+    # return list_per_topic
 
-    # resultado = lda(fragmentos)
-    # for topic in resultado["topics"]:
-    #     print(topic)
+
+if __name__ == "__main__":
     with open("ejemplo.txt", "r") as file:
         chat_telegram = file.read()
 
         # print(fragmentar_chat_telegram(chat_telegram))
         lista_mensajes = fragmentar_chat_telegram(chat_telegram)
-        resultado = lda(lista_mensajes, 3)
-        for topic in resultado["topics"]:
-            print(topic)
-        # print(resultado["topics"])
+        lda_model = model_lda(lista_mensajes, 3)
+
+        topicos = lda_model.show_topics(formatted=False)
+        print(topicos)

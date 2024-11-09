@@ -1,5 +1,5 @@
 import argparse
-from fine_tuned import summarize_chat
+from llm.fine_tuned import summarize_chat
 import sys
 
 
