@@ -7,3 +7,7 @@
 run: 
 	@(. .venv/bin/activate; \
 	python3 main.py;)
+
+test:
+	@(. .venv/bin/activate; \
+	python3 test.py;)

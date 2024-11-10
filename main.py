@@ -5,6 +5,7 @@ from llm.fine_tuned import (
     pretty_print_summary_list,
 )
 import sys
+from test import full_tests
 
 
 def process_file(file_path):

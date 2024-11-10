@@ -22,7 +22,7 @@ def summarize_per_topic(chat):
     resumen por tema encontrado
     """
     summary_list = []
-    topic_list = chat_to_filtered_per_topic(chat, type=TELEGRAM)
+    topic_list = chat_to_filtered_per_topic(chat)
     for n_topic, topics, message_list in topic_list:
         joined_messages = "\n".join(message_list)
         summary = summarize_chat(joined_messages)

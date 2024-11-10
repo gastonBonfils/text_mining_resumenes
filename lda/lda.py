@@ -77,8 +77,8 @@ def model_lda(lista_mensajes, num_topics=6):
         #     "dictionary": dictionary,
         #     "topics": lda_model.print_topics(),
         # }
-        rta_lda = lda_model
-    return rta_lda
+        # rta_lda = lda_model
+    return lda_model
 
 
 def message_list_per_topic(topics_list, message_list):
@@ -116,20 +116,19 @@ def message_list_per_topic(topics_list, message_list):
     return final_list
 
 
-def chat_to_filtered_per_topic(chat, type=0):
+def chat_to_filtered_per_topic(chat):
     """
     esta funcion se encarga de ir llamando todo proceduralmente
     deberia ser la unica llamada desde afuera
 
-    chat: string del chat
-        ya se asume que se parseo el path o el copia_pega
+    # chat: string del chat
+    #     ya se asume que se parseo el path o el copia_pega
 
-    type: que tipo de chat es
-        telegram, whatasapp o no e cual otoro
+    # type: que tipo de chat es
+    #     telegram, whatasapp o no e cual otoro
     """
-    lista_mensajes = []
-    if type == 0:
-        lista_mensajes = fragmentar_chat_cualquiera(chat)
+
+    lista_mensajes = fragmentar_chat_cualquiera(chat)
 
     # no se cuantos topics deberia ser lo ideal
     lda_model = model_lda(lista_mensajes, 6)
