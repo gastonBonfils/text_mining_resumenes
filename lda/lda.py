@@ -4,12 +4,12 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import nltk
 import re
+import unicodedata
 
 nltk.download("stopwords")
 nltk.download("wordnet")
 
 from lda.chat_parser import fragmentar_chat_cualquiera
-import unicodedata
 
 
 def quitar_tildes(texto):
@@ -128,8 +128,6 @@ def chat_to_filtered_per_topic(chat):
     # chat: string del chat
     #     ya se asume que se parseo el path o el copia_pega
 
-    # type: que tipo de chat es
-    #     telegram, whatasapp o no e cual otoro
     """
 
     lista_mensajes, caso_normal = fragmentar_chat_cualquiera(chat)

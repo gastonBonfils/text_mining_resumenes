@@ -1,4 +1,8 @@
-from llm.fine_tuned import summarize_chat, summarize_per_topic
+from llm.fine_tuned import (
+    summarize_chat,
+    summarize_per_topic,
+    pretty_string_summary_list,
+)
 import os
 
 
@@ -16,22 +20,22 @@ def process_file(file_path):
     return content
 
 
-def pretty_string_summary_list(summary_list):
-    """
-    imprime de manera lejible la lista de resumenes
-    """
-    text = ""
-    for n_tema, temas, resumen in summary_list:
-        text += f"""
-=============
-Tema #{n_tema}
-Temas relevantes = {temas}
-Resumen:
-{resumen}
-=============
+# def pretty_string_summary_list(summary_list):
+#     """
+#     imprime de manera lejible la lista de resumenes
+#     """
+#     text = ""
+#     for n_tema, temas, resumen in summary_list:
+#         text += f"""
+# =============
+# Tema #{n_tema}
+# Temas relevantes = {temas}
+# Resumen:
+# {resumen}
+# =============
 
-"""
-    return text
+# """
+#     return text
 
 
 def test_particular(archivo):
@@ -55,7 +59,9 @@ def test_particular(archivo):
         final_text += "Resumen Crudo:\n"
         final_text += str(resumen_crudo) + "\n\n"
         final_text += "Resumenes por Tema:\n"
-        resuemens_por_tema = pretty_string_summary_list(lista_resumenes)
+        resuemens_por_tema = pretty_string_summary_list(
+            lista_resumenes, show_messages=True
+        )
         final_text += resuemens_por_tema
         output_file.write(final_text)
 

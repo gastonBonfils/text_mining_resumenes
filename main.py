@@ -63,7 +63,7 @@ def main():
     # print(summary)
     summaries = summarize_per_topic(chat)
     # print(summaries)
-    pretty_print_summary_list(summaries)
+    pretty_print_summary_list(summaries, show_messages=True)
 
 
 if __name__ == "__main__":

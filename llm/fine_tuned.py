@@ -1,9 +1,6 @@
 from transformers import pipeline
 from lda.lda import chat_to_filtered_per_topic
 
-TELEGRAM = 0
-WHATSAPP = 1
-
 
 def summarize_chat(chat):
     """
@@ -29,23 +26,46 @@ def summarize_per_topic(chat):
 
         # print(f"Resumen de tema {n_topic}:\n {summary}\n===\n")
 
-        summary_list.append((n_topic, topics, summary))
+        summary_list.append((n_topic, topics, summary, joined_messages))
 
     return summary_list
 
 
-def pretty_print_summary_list(summary_list):
+def pretty_print_summary_list(summary_list, show_messages=False):
     """
     imprime de manera lejible la lista de resumenes
     """
-    for n_tema, temas, resumen in summary_list:
-        print(
-            f"""
+    text = ""
+    for n_tema, temas, resumen, messages in summary_list:
+        text += f"""
 =============
 Tema #{n_tema}
 Temas relevantes = {temas}
 Resumen:
 {resumen}
-=============
+
 """
-        )
+        if show_messages:
+            text += messages
+        text += "\n=============\n"
+    print(text)
+
+
+def pretty_string_summary_list(summary_list, show_messages=False):
+    """
+    imprime de manera lejible la lista de resumenes
+    """
+    text = ""
+    for n_tema, temas, resumen, messages in summary_list:
+        text += f"""
+=============
+Tema #{n_tema}
+Temas relevantes = {temas}
+Resumen:
+{resumen}
+
+"""
+        if show_messages:
+            text += messages
+        text += "\n=============\n"
+    return text
