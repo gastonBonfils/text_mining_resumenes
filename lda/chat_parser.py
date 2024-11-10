@@ -46,8 +46,13 @@ def fragmentar_chat_cualquiera(chat):
         r"([A-Za-z\s]+), \[\d{1,2}/\d{1,2}/\d{2} \d{1,2}:\d{2}\s?[APM]{2}\]\n(.+?)\n"
     )
 
+    whatasapp_02_pattern = (
+        r"\[\d{1,2}:\d{2} (?:a\.m\.|p\.m\.), \d{1,2}/\d{1,2}/\d{4}\] ([^:]+): (.+)"
+    )
+
     matches_wasap = re.findall(whatsapp_phone_pattern, chat)
     matches_telegram = re.findall(telegram_pattern, chat, re.DOTALL)
+    matches_wasap_02 = re.findall(whatasapp_02_pattern, chat)
 
     telegram_list = [
         f"{name.strip()}: {content.strip()}" for name, content in matches_telegram
@@ -56,9 +61,11 @@ def fragmentar_chat_cualquiera(chat):
     whatsapp_list = [
         f"{name.strip()}: {content.strip()}" for fecha, name, content in matches_wasap
     ]
-
+    whatsapp_02_list = [
+        f"{name.strip()}: {content.strip()}" for name, content in matches_wasap_02
+    ]
     caso_normal = True
-    message_list = telegram_list + whatsapp_list
+    message_list = telegram_list + whatsapp_list + whatsapp_02_list
 
     # esto sucede si ninguno tiene hace match, entonces es otro formato
     # por ahora se asume que este formato viene sin fechas

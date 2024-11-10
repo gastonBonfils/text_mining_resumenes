@@ -58,11 +58,10 @@ def main():
     else:
         chat = process_file(args.file)
 
-    # summaries = summarize_chat(chat)
-
-    # print(summary)
+    summary = summarize_chat(chat)
     summaries = summarize_per_topic(chat)
-    # print(summaries)
+
+    print(summary)
     pretty_print_summary_list(summaries, show_messages=True)
 
 

@@ -20,24 +20,6 @@ def process_file(file_path):
     return content
 
 
-# def pretty_string_summary_list(summary_list):
-#     """
-#     imprime de manera lejible la lista de resumenes
-#     """
-#     text = ""
-#     for n_tema, temas, resumen in summary_list:
-#         text += f"""
-# =============
-# Tema #{n_tema}
-# Temas relevantes = {temas}
-# Resumen:
-# {resumen}
-# =============
-
-# """
-#     return text
-
-
 def test_particular(archivo):
     """
     dado el nombre del archivo (no la ruta), corre
