@@ -12,7 +12,10 @@ nltk.download("wordnet")
 from lda.chat_parser import fragmentar_chat_cualquiera
 
 
-def quitar_tildes(texto):
+def normalizar_texto(texto):
+    """
+    quita tildes y lo pasa a miniscula
+    """
     # Normalizamos el texto para separar las letras acentuadas
     texto_normalizado = unicodedata.normalize("NFD", texto)
 
@@ -23,7 +26,8 @@ def quitar_tildes(texto):
     )
 
     # Devolvemos el texto sin tildes
-    return texto_sin_tildes
+    texto_minus = re.sub(r"[,\.!?]", "", texto_sin_tildes.lower())
+    return texto_minus
 
 
 def model_lda(lista_mensajes, caso_normal, num_topics=6):
@@ -56,12 +60,13 @@ def model_lda(lista_mensajes, caso_normal, num_topics=6):
                 contenido = ""
 
         # filtro la puntuación y los paso a minuscula
-        contenido_sin_tilde = quitar_tildes(contenido)
-        contenido_sin_puntuacion = re.sub(r"[,\.!?]", "", contenido_sin_tilde.lower())
+        # contenido_sin_tilde = normalizar_texto(contenido)
+        # contenido_sin_puntuacion = re.sub(r"[,\.!?]", "", contenido_sin_tilde.lower())
+        contenido_normalizado = normalizar_texto(contenido)
         texts.append(
             [
                 lemmatizer.lemmatize(palabra)
-                for palabra in re.findall(r"\b\w+\b", contenido_sin_puntuacion)
+                for palabra in re.findall(r"\b\w+\b", contenido_normalizado)
                 if palabra not in stop_words and len(palabra) > 2
             ]
         )
@@ -113,7 +118,9 @@ def message_list_per_topic(topics_list, message_list):
         # una vez que salí del bucle (i.e. tengo los temas relevantes)
         # hago una lista de mensajes filtrada
         mensajes_relevantes = [
-            msj for msj in message_list if any(tema in msj for tema in temas_relevantes)
+            msj
+            for msj in message_list
+            if any(tema in normalizar_texto(msj) for tema in temas_relevantes)
         ]
         final_list.append((n_tema, temas_relevantes, mensajes_relevantes))
 
