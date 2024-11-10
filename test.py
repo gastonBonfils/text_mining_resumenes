@@ -68,5 +68,6 @@ def full_tests():
 
 if __name__ == "__main__":
     # Your code here
-    test_particular("telegram_02.txt")
+    # test_particular("telegram_02.txt")
     # print("miau")
+    full_tests()

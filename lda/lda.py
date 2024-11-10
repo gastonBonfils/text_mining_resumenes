@@ -26,7 +26,7 @@ def quitar_tildes(texto):
     return texto_sin_tildes
 
 
-def model_lda(lista_mensajes, num_topics=6):
+def model_lda(lista_mensajes, caso_normal, num_topics=6):
     """
     CAMBIO
     Paso una lista de mensajes de la forma [AUTOR: CONTENIDO]
@@ -43,13 +43,17 @@ def model_lda(lista_mensajes, num_topics=6):
     texts = []
     for msj in lista_mensajes:
         # Extraer solo el contenido del mensaje
-        match = re.search(
-            r"^.*?:\s*(.+)", msj
-        )  # Buscar el contenido después del nombre del autor
-        if match:
-            contenido = match.group(1)
-        else:
-            contenido = ""
+        contenido = msj
+        # si es un caso normal, entonces matchea, sacando el autor
+        # sino, el contenido es el mensaje
+        if caso_normal:
+            match = re.search(
+                r"^.*?:\s*(.+)", msj
+            )  # Buscar el contenido después del nombre del autor
+            if match:
+                contenido = match.group(1)
+            else:
+                contenido = ""
 
         # filtro la puntuación y los paso a minuscula
         contenido_sin_tilde = quitar_tildes(contenido)
@@ -87,7 +91,7 @@ def message_list_per_topic(topics_list, message_list):
     [(n_tema [('tema', porcentaje)]), ... ]
     y la lista de mensajes
     devuele una lista de la forma
-    [(n_tema, [lista de temas relevantes (para testign)] , [lista de mensajes relevantes al tema]), ....]
+    [(n_tema, [lista de temas relevantes (para testing)] , [lista de mensajes relevantes al tema]), ....]
     """
     final_list = []
     for n_tema, lista_temas in topics_list:
@@ -128,10 +132,10 @@ def chat_to_filtered_per_topic(chat):
     #     telegram, whatasapp o no e cual otoro
     """
 
-    lista_mensajes = fragmentar_chat_cualquiera(chat)
+    lista_mensajes, caso_normal = fragmentar_chat_cualquiera(chat)
 
     # no se cuantos topics deberia ser lo ideal
-    lda_model = model_lda(lista_mensajes, 6)
+    lda_model = model_lda(lista_mensajes, caso_normal, num_topics=6)
     topics = lda_model.show_topics(formatted=False)
     lista_filtrada = message_list_per_topic(topics, lista_mensajes)
     return lista_filtrada
@@ -141,17 +145,17 @@ if __name__ == "__main__":
     """
     el main funciona como para debuggear
     """
-    with open("ejemplo.txt", "r") as file:
-        chat_telegram = file.read()
+    # with open("ejemplo.txt", "r") as file:
+    #     chat_telegram = file.read()
 
-        # print(fragmentar_chat_telegram(chat_telegram))
-        lista_mensajes = fragmentar_chat_cualquiera(chat_telegram)
-        lda_model = model_lda(lista_mensajes, 3)
+    #     # print(fragmentar_chat_telegram(chat_telegram))
+    #     lista_mensajes = fragmentar_chat_cualquiera(chat_telegram)
+    #     lda_model = model_lda(lista_mensajes, 3)
 
-        topicos = lda_model.show_topics(formatted=False)
-        print(topicos)
+    #     topicos = lda_model.show_topics(formatted=False)
+    #     print(topicos)
 
-        lista_filtrada = message_list_per_topic(topicos, lista_mensajes)
+    #     lista_filtrada = message_list_per_topic(topicos, lista_mensajes)
 
-        print("=====")
-        print(lista_filtrada)
+    #     print("=====")
+    #     print(lista_filtrada)

@@ -35,6 +35,9 @@ def fragmentar_chat_cualquiera(chat):
     """
     dado un chat de Telegram o Whatsapp del celular guarda cada mensaje en una lista
 
+    se agrega la flag "caso_normal" para los casos que no son cubiertos por
+    los patrones de abajo (Telegram o Whatsapp celular)
+
     """
     whatsapp_phone_pattern = r"\[(\d{1,2}/\d{1,2} \d{2}:\d{2})\] (\w+): (.+)"
 
@@ -54,11 +57,17 @@ def fragmentar_chat_cualquiera(chat):
         f"{name.strip()}: {content.strip()}" for fecha, name, content in matches_wasap
     ]
 
-    # print(telegram_list)
-    # print(whatsapp_list)
+    caso_normal = True
     message_list = telegram_list + whatsapp_list
-    # print(message_list)
-    return message_list
+
+    # esto sucede si ninguno tiene hace match, entonces es otro formato
+    # por ahora se asume que este formato viene sin fechas
+    if message_list == []:
+        message_list = chat.split("\n")
+        caso_normal = False
+        # message_list = list(filter(lambda x: x != "", message_list))
+
+    return message_list, caso_normal
 
 
 if __name__ == "__main__":
