@@ -16,7 +16,8 @@ def process_file(file_path):
             content = file.read()
     except:
         print("El archivo no se encontró")
-        exit(1)
+        # exit(1)
+        content = None
     return content
 
 
@@ -58,4 +59,12 @@ if __name__ == "__main__":
     # Your code here
     # test_particular("telegram_02.txt")
     # print("miau")
-    full_tests()
+    ruta = input(
+        "Que archivo te gustaría testear? \nSI NO SE ENCUENTRA EL ARCHIVO SE TESTEA TODOs\n"
+    )
+    contenido = process_file(ruta)
+    if contenido is None:
+        full_tests()
+    else:
+        nombre_archivo = os.path.basename(ruta)
+        test_particular(nombre_archivo)

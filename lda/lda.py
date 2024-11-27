@@ -162,5 +162,5 @@ if __name__ == "__main__":
 
     #     lista_filtrada = message_list_per_topic(topicos, lista_mensajes)
 
-    #     print("=====")
+    print("=====")
     #     print(lista_filtrada)

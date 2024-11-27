@@ -61,7 +61,7 @@ def main():
     summary = summarize_chat(chat)
     summaries = summarize_per_topic(chat)
 
-    print(summary)
+    print("\nResumen crudo:\n", summary)
     pretty_print_summary_list(summaries, show_messages=True)
 
 
