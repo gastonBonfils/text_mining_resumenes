@@ -24,7 +24,7 @@ Nuestros objetivos preliminares consistieron en:
 
 Estos tres primeros objetivos los logramos alcanzar implementando `LDA` para filtrado de temas y así que experimentando pudimos llegar a resultados satisfactorios.
 
-Por otro lado, el objetivo de **Evaluación automática de resumen** no lo pudimos implementar como nos hubiera gustado. Nos tuvimos que limitar a evaluaciones cualitativas juzgadas por nosotros mismos y hacer comparaciones superficiales sobre los diferentes resultados.
+Por otro lado, el objetivo de **Evaluación automática de resumen** no lo pudimos implementar como nos hubiera gustado. Nos tuvimos que limitar a evaluaciones cualitativas juzgadas por nosotros mismos y hacer comparaciones anedóticas sobre los diferentes resultados.
 
 También nos hubiera gustado probar entrenar un modelo con nuestros mensajes, pues notamos que los únicos modelos que lograban resumir bien eran los que fueron entrenados para resumir chats en particular (mas sobre esto adelante).
 
@@ -66,7 +66,11 @@ Los resultados fueron notablemente mejores. Este modelo no alucinó cuando se re
 Al ser la primera vez que trabajamos con un proyecto de esta área las estimaciones que realizamos no fueron de lo mas precisas.  
 En un principio, planeamos distribuir el trabajo dentro de 5 semanas, pero solo pudimos implementar los objetivos que nos planteamos en las primeras tres semanas (preparar la LLM inicial, implementar LDA y conectarlo con la LLM). Nos quedó pendiente poder autimatizar las evaluaciones de resultados y entrenar un modelo con nuestros mensajes.  
 
+## Futuro del trabajo
+Respondiendo la pregunta: "¿cómo continuarían este proyecto con 5 personas a tiempo completo durante un año?".  
+Lo primero que nos gustaría hacer sería fine-tunear un modelo. Por lo que observamos comparando los modelos, el principal factor entre si un modelo servía o no era si estaba entrenado con algún dataset de conversaciones o no. Además, no encontramos modelos especializados en español que anduvieran bien.  
 
+Otra cosa que nos gustaría implementar serían tests automatizados. Aunque anduvimos bien con nuestra evaluación anedótica, nos hubiera gustado probar una mayor combinación de posibles casos (por ejemplo, conversación larga y un tema; conversación larga y varios temas; etc) para tener una mejor idea cuales eran los puntos débiles y fuertes de nuestra implementación.
 
 ## Referencias
 https://huggingface.co/facebook/bart-large-cnn
