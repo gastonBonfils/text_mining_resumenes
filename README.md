@@ -1,15 +1,10 @@
-# Instalación
 
-`python3 -m venv .venv`  
-`source .venv/bin/activate`  
-`pip install -q -r requirements.txt`  
-
-
-# Resumenes de chats grupales
+# Resumenes de chats grupales - Informe Final
 
 ## Resumen
 
-El proyecto tiene como objetivo realizar un resumen de los temas más significativos en un chat grupal propio, utilizando datos reales de conversaciones obtenidas de nuestras propias interacciones, en lugar de datasets externos. Para ello, se tendrán en cuenta la relevancia de los mensajes, los temas tratados, y la participación de los usuarios más activos en cada tema. El resumen se generará utilizando LLMs. Luego se buscara mejorar las respuestas utilizando técnicas de identificación de temas como LDA y fine-tunear el modelo con nuestras propias conversaciones.
+El proyecto tiene como objetivo realizar un resumen de los temas más significativos en un chat grupal propio, utilizando datos reales de conversaciones obtenidas de nuestras propias interacciones, en lugar de datasets externos. Para ello, se tendrán en cuenta la relevancia de los mensajes, los temas tratados, y la participación de los usuarios más activos en cada tema. El resumen se generará utilizando LLMs. Luego se buscara mejorar las respuestas utilizando técnicas de identificación de temas como LDA. Se comparran estos resutlados con otros modelos de lenguaje.
+<!-- y fine-tunear el modelo con nuestras propias conversaciones. -->
 
 ## Hipótesis
 
@@ -18,34 +13,43 @@ El proyecto tiene como objetivo realizar un resumen de los temas más significat
 Utilizar técnicas de detección de temas como LDA, mejorará la calidad de las respuestas del LLM. Además, se espera que mejoré la calidad al entrenarla con nuestras conversaciones.  
 
 
-## Objetivos preliminares
 
+## Relación entre objetivos iniciales y estado final alcanzado
+<!-- ## Objetivos preliminares -->
+
+Nuestros objetivos preliminares consistieron en:  
 - **Análisis de contenido**: Identificar los temas principales discutidos en el chat grupal mediante técnicas de agrupamiento temático.
 - **Compresión de la información**: Generar un resumen corto que conserve la esencia de las discusiones principales sin perder detalles críticos.
-- **Evaluación de la calidad del resumen**: Implementar tests automáticos para evaluar la precisión y cobertura de los resúmenes generados.
-
-### Revisión de objetivos
-- **Evaluación automática**: No sabemos si podremos implementar tests automáticos de manera confiable. Por ahora evaluamos manualmente cada ejemplo que probamos.  
 - **Resumenes de varios temas**: Actualmente, el programa no es preciso resumiendo muchos mensajes (mas de 15) por lo que se busca filtrar mensajes por tema y buscar resumir en grupos de tema. 
 
+Estos tres primeros objetivos los logramos alcanzar implementando `LDA` para filtrado de temas y así que experimentando pudimos llegar a resultados satisfactorios.
 
-## Técnicas relevantes para aplicar
-Para el resumen principal se utilizará una LLM que busque resumir el chat. Por el momento se usa un [modelo de resumenes finetuneado chats](https://huggingface.co/kabita-choudhary/finetuned-bart-for-conversation-summary)  
-Para el modelado de temas se utilizaran análisis de frecuencia de palabras, Latent Dirichlet Allocation y clustering.
-Para el fine-tuning, resumen y evaluación se utilizarán Google Colab y la librería Transformers de Hugging Face.
+Por otro lado, el objetivo de **Evaluación automática de resumen** no lo pudimos implementar como nos hubiera gustado. Nos tuvimos que limitar a evaluaciones cualitativas juzgadas por nosotros mismos y hacer comparaciones superficiales sobre los diferentes resultados.
+
+También nos hubiera gustado probar entrenar un modelo con nuestros mensajes, pues notamos que los únicos modelos que lograban resumir bien eran los que fueron entrenados para resumir chats en particular (mas sobre esto adelante).
+
+
+
+## Técnicas relevantes exploradas
+Para el resumen principal se utilizazó una LLM que busque resumir el chat. En un principio usamos un [modelo de resumenes finetuneado chats](https://huggingface.co/kabita-choudhary/finetuned-bart-for-conversation-summary)  
+Para el modelado de temas se utilizó análisis de frecuencia de palabras, Latent Dirichlet Allocation y clustering.
+<!-- Para el fine-tuning, resumen y evaluación se utilizarán Google Colab y la librería Transformers de Hugging Face. -->  
+
 
 ## Avances en la metodología y evaluación del progreso
-Hasta el momento se han probado los siguientes modelos de lenguaje
+En un principio se habrían probado los siguientes modelos de lenguaje
 - [Phi 3 - Microsoft](https://huggingface.co/microsoft/Phi-3-medium-128k-instruct): muy pesado y lento para nuestros propósitos
 - [RoBERTa2RoBERTa](https://huggingface.co/Narrativa/bsc_roberta2roberta_shared-spanish-finetuned-mlsum-summarization): no se pudo hacer andar
 - [Bart](https://huggingface.co/facebook/bart-large-cnn?): Buena performance en general pero no óptima para conversaciones
 - [Finetuned bart](https://huggingface.co/kabita-choudhary/finetuned-bart-for-conversation-summary): Mejor resultado hasta el momento
 
-Además, se están haciendo pruebas utilizando métodos como LDA para ayudar al LLM a elegir los temas correctos a resumir.
+<!-- Además, se están haciendo pruebas utilizando métodos como LDA para ayudar al LLM a elegir los temas correctos a resumir. -->
 
-Por ahora los resultados base son medianamente satisfactorios. En algunos casos el modelo no hace hincapie en lo que consideramos el tema principal pero esperamos poder optimizarlo.  
+Los resultados base fueron medianamente satisfactorios. En algunos casos el modelo no hace hincapie en lo que consideramos el tema principal o sufría de muchas alucinasiones. 
 
-Lo que esperamos para el final del proyecto es poder resumir identificando temas.  
+
+
+
 ## Referencias
 https://huggingface.co/facebook/bart-large-cnn
 
