@@ -47,7 +47,20 @@ En un principio se habrían probado los siguientes modelos de lenguaje
 
 Los resultados base fueron medianamente satisfactorios. En algunos casos el modelo no hace hincapie en lo que consideramos el tema principal o sufría de muchas alucinasiones. 
 
+Cuando implementamos `LDA` se notaba una mejora en el enfoque de los temas pero en algunos casos daba a resumenes muy alucinados y desvíados de cualquier tema.  
 
+De todas maneras, este modelo lo pudimos apreciar por lo liviano que era. Todos los ejemplos que fuimos probando pudimos correrlos de manera local sin necesidad de esperar mucho en la ejecución.
+
+### Pruebas en modelos mas pesados
+Con acceso al Centro de Computo de Alto Desempeño (CCAD) de la UNC pudimos hacer pruebas con modelos de lenguajes mas pesados. Los modelos que probamos fueron:
+- [SummLlama3.2-3B](https://huggingface.co/DISLab/SummLlama3.2-3B)
+- [Pegasus-xsum](https://huggingface.co/google/pegasus-xsum)
+
+Estos dos primeros modelos no estaban entrenados en conversaciones de dialogo (y si lo estaban, eran en formatos de dialogos muy específicos), por lo que los resultados que obtuvimos fueron ensalas de caracteres sin sentido.
+
+Luego probamos con [flan-t5-3b-summarizer](https://huggingface.co/jordiclive/flan-t5-3b-summarizer) el cual esta especializado para hacer resumenes distintos tipos de documentos. La documentación aclara usar el prompt `"Briefly summarize in third person the following conversation:"` para resumir chats.
+
+Los resultados fueron notablemente mejores. Este modelo no alucinó cuando se realizaban resumenes por tema, siempre utilizaba palabras cercanas a lo que se habló sin nunca inventar información.
 
 
 ## Referencias
@@ -59,6 +72,7 @@ https://towardsdatascience.com/end-to-end-topic-modeling-in-python-latent-dirich
 
 https://colab.research.google.com/github/dudaspm/LDA_Bias_Data/blob/main/Latent%20Dirichlet%20Allocation%20(LDA).ipynb
 
+https://huggingface.co/jordiclive/flan-t5-3b-summarizer
 
 ## Planificación
 
