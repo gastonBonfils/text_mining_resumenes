@@ -62,6 +62,11 @@ Luego probamos con [flan-t5-3b-summarizer](https://huggingface.co/jordiclive/fla
 
 Los resultados fueron notablemente mejores. Este modelo no alucinó cuando se realizaban resumenes por tema, siempre utilizaba palabras cercanas a lo que se habló sin nunca inventar información.
 
+## Planificación inicial y ejecución efectiva
+Al ser la primera vez que trabajamos con un proyecto de esta área las estimaciones que realizamos no fueron de lo mas precisas.  
+En un principio, planeamos distribuir el trabajo dentro de 5 semanas, pero solo pudimos implementar los objetivos que nos planteamos en las primeras tres semanas (preparar la LLM inicial, implementar LDA y conectarlo con la LLM). Nos quedó pendiente poder autimatizar las evaluaciones de resultados y entrenar un modelo con nuestros mensajes.  
+
+
 
 ## Referencias
 https://huggingface.co/facebook/bart-large-cnn
@@ -73,31 +78,3 @@ https://towardsdatascience.com/end-to-end-topic-modeling-in-python-latent-dirich
 https://colab.research.google.com/github/dudaspm/LDA_Bias_Data/blob/main/Latent%20Dirichlet%20Allocation%20(LDA).ipynb
 
 https://huggingface.co/jordiclive/flan-t5-3b-summarizer
-
-## Planificación
-
-**Semana 1:** 
-- Revisión de las documentacion de referencia y probar dichas herramientas. 
-- Configuración del entorno de trabajo y familiarización con el mismo.
-<!-- - Carga de Datasets, modificación de los datos para mejorar su utilidad en el contexto del trabajo y procesamiento de datos. -->
-
-**Semana 2:** 
-- Implementar técnicas de modelado temático, tales como Latent Dirichlet Allocation (LDA), para identificar los temas principales discutidos en el chat grupal.
-
-
-**Semana 3:**
-- Afinar y mejorar el modelo para agrupar los mensajes de manera efectiva según el tema tratado.
-- Identificación de los usuarios más activos en cada tema y generación de visualizaciones básicas para representar la distribución de temas y participantes.
-
-**Semana 4:** 
-- Preparar el conjunto de datos para entrenar modelos pre-entrenados (LLMs) utilizando la librería Transformers de Hugging Face.
-- Aplicar técnicas de fine-tuning para personalizar un modelo LLM con el objetivo de generar resúmenes de los temas principales extraídos.
-- Realizar pruebas iniciales de los resúmenes generados y ajustar los parámetros del modelo para mejorar la precisión.
-
-**Semana 5:** 
-<!-- - Implementar tests automáticos para evaluar la precisión y la cobertura de los resúmenes generados. -->
-- Comparar la calidad de los resúmenes obtenidos con resúmenes manuales de las conversaciones, revisando posibilades de pruebas automáticaa.
-<!-- - Refinar los modelos y evaluar la coherencia y relevancia de los resúmenes en función de los temas y usuarios más destacados. -->
-- Realizar los ajustes finales en el modelo y optimizar la generación de resúmenes para maximizar su utilidad.
-- Documentar todo el proceso realizado, incluyendo la preparación del entorno, análisis temático, fine-tuning, evaluación de resultados y conclusiones obtenidas.
-- Preparación del informe y la presentación final del proyecto, mostrando ejemplos de resúmenes generados y la explicación de los métodos utilizados.
