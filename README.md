@@ -62,6 +62,47 @@ Luego probamos con [flan-t5-3b-summarizer](https://huggingface.co/jordiclive/fla
 
 Los resultados fueron notablemente mejores. Este modelo no alucinó cuando se realizaban resumenes por tema, siempre utilizaba palabras cercanas a lo que se habló sin nunca inventar información.
 
+### Ejemplos de resultados
+El ejemplo completo se puede encontrar en la carpeta [examples](./examples)  
+
+Algunos de los resultados fueron  
+
+Chat completo
+```
+Finetuned bart
+
+[{'summary_text': 'Gaston Bonfils and Tomas Martinez are talking about their part in a game of football that took place on 10/17/24.'}]
+
+
+Flan
+
+[{'summary_text': 'Tomas Martinez, Gaston Bonfils and Yo toy saliendo del fulbo.'}]
+```
+Flan en chats mas completos muestra peores resultados.  
+
+
+
+Resumenes por tema
+```
+Finetuned bart
+
+Temas relevantes = ['god', 'ganaron', 'contes', 'buen', 'depe', 'partido', 'ahi', 'perdimos', 'viendo', 'fulbo']
+Resumen:
+[{'summary_text': "Gaston Bonfils' toy is saliendo del fulbo. Tomas Martinez no has any contes, pero buen partido."}]
+
+
+Flan
+
+Temas relevantes = ['god', 'ganaron', 'contes', 'viendo', 'ahi', 'perdimos', 'buen', 'partido', 'depe']
+Resumen:
+[{'summary_text': 'Tomas Martinez and Gaston Bonfils are having a good time.'}]
+```
+En chats mas pequeños Finetuned Bart suele sufrir de mas alucinaciones. De todas maneras en este caso Flan no muesta un resultado satisfactorio debido a la falta de particularización del resumen.  
+
+
+Recordar que la detección de temas no es deterministica, por lo que puede haber diferencias en los mensajes utilizados.  
+
+
 ## Planificación inicial y ejecución efectiva
 Al ser la primera vez que trabajamos con un proyecto de esta área las estimaciones que realizamos no fueron de lo mas precisas.  
 En un principio, planeamos distribuir el trabajo dentro de 5 semanas, pero solo pudimos implementar los objetivos que nos planteamos en las primeras tres semanas (preparar la LLM inicial, implementar LDA y conectarlo con la LLM). Nos quedó pendiente poder autimatizar las evaluaciones de resultados y entrenar un modelo con nuestros mensajes.  

@@ -1,0 +1,78 @@
+Resumen Crudo:
+[{'summary_text': 'Tomas Martinez, Gaston Bonfils and Yo toy saliendo del fulbo.'}]
+
+Resumenes por Tema:
+
+=============
+Tema #0
+Temas relevantes = ['tecnicas', 'supervisadas', 'utilizar', 'habria', 'notion', 'exactamente']
+Resumen:
+[{'summary_text': "Tomas Martinez doesn't like the idea of using tecnicas without supervising them."}]
+
+Tomas Martinez: Habria que utilizar tecnicas no supervisadas
+Tomas Martinez: exactamente como el colab que estaba en el notion
+=============
+
+=============
+Tema #1
+Temas relevantes = ['god', 'ganaron', 'contes', 'viendo', 'ahi', 'perdimos', 'buen', 'partido', 'depe']
+Resumen:
+[{'summary_text': 'Tomas Martinez and Gaston Bonfils are having a good time.'}]
+
+Tomas Martinez: ahi estuve viendo
+Gaston Bonfils: God
+Tomas Martinez: no me la contes
+Tomas Martinez: ganaron??
+Gaston Bonfils: Perdimos depe
+Gaston Bonfils: Pero buen partido
+=============
+
+=============
+Tema #2
+Temas relevantes = ['ganaron', 'contes', 'viendo', 'ahi', 'god', 'perdimos', 'partido', 'depe', 'buen', 'colab']
+Resumen:
+[{'summary_text': 'Tomas Martinez and Gaston Bonfils are talking about a colab.'}]
+
+Tomas Martinez: exactamente como el colab que estaba en el notion
+Tomas Martinez: ahi estuve viendo
+Gaston Bonfils: God
+Tomas Martinez: no me la contes
+Tomas Martinez: ganaron??
+Gaston Bonfils: Perdimos depe
+Gaston Bonfils: Pero buen partido
+=============
+
+=============
+Tema #3
+Temas relevantes = ['ganaron', 'contes', 'god', 'ahi', 'viendo', 'perdimos', 'depe', 'partido', 'buen', 'colab']
+Resumen:
+[{'summary_text': 'Tomas Martinez and Gaston Bonfils are talking about a colab.'}]
+
+Tomas Martinez: exactamente como el colab que estaba en el notion
+Tomas Martinez: ahi estuve viendo
+Gaston Bonfils: God
+Tomas Martinez: no me la contes
+Tomas Martinez: ganaron??
+Gaston Bonfils: Perdimos depe
+Gaston Bonfils: Pero buen partido
+=============
+
+=============
+Tema #4
+Temas relevantes = ['atajaron', 'unico', 'tiro', 'arco', 'buen']
+Resumen:
+[{'summary_text': 'Gaston Bonfils played a game at the arco.'}]
+
+Gaston Bonfils: Me atajaron el único tiro al arco 😔
+Gaston Bonfils: Pero buen partido
+=============
+
+=============
+Tema #5
+Temas relevantes = ['saliendo', 'fulbo', 'toy', 'depe', 'perdimos']
+Resumen:
+[{'summary_text': 'Gaston Bonfils sends Yo toy saliendo del fulbo.'}]
+
+Gaston Bonfils: Yo toy saliendo del fulbo
+Gaston Bonfils: Perdimos depe
+=============
